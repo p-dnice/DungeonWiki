@@ -1,12 +1,6 @@
 import igraph
 from prettytable import PrettyTable
 import sys
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> parent of 3ee2485 (Update master)
 import time
 
 name_array = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]  # Массив имен вершин
