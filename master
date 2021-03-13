@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 #sdsd
 какаши — лучший мега «ниндзя»
 dddd
-=======
->>>>>>> parent of c7d6c0e (Revert "Update master")
 import igraph
 from prettytable import PrettyTable
 import sys
