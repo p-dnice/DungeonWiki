@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import igraph
 from prettytable import PrettyTable
 import sys
@@ -500,3 +501,7 @@ if __name__ == "__main__":
             break
         else:
             print("Wrong select!")
+=======
+вова это мега обнова!
+какаши — лучший мега «ниндзя»
+>>>>>>> parent of 0ade42c (Update master)
