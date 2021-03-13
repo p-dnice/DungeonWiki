@@ -1,2 +1,507 @@
+<<<<<<< HEAD
 вова это мега обнова!
 какаши — лучший мега «ниндзя»
+=======
+import igraph
+from prettytable import PrettyTable
+import sys
+import time
+
+name_array = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]  # Массив имен вершин
+# Матрица смежности
+adjacency_matrix = [
+    [0, 0, 0, 2, 0, 0, 0],
+    [3, 0, 6, 0, 0, 2, 0],
+    [0, 0, 0, 8, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 7, 0, 0, 3, 0],
+    [0, 0, 0, 0, 0, 0, 5],
+    [1, 4, 0, 0, 0, 0, 0]
+]
+adjacency_list = []  # Список смежности
+record_array = []  # Массив записей
+# Колонки массива записей
+record_array_th = ["ID", "Name", "Count Child", "Child", "Count Parents", "Parents", "Count Neighbors", "Neighbors",
+                   "Weights"]
+
+
+# Функции заполнения
+def compile_adjacency_list():
+    for i in range(len(name_array)):
+        for j in range(len(name_array)):
+            if adjacency_matrix[i][j] != 0:
+                adjacency_list.append([name_array[i], name_array[j], adjacency_matrix[i][j]])
+
+
+def compile_record_array():
+    for i in range(len(name_array)):
+        record_array.append([i, name_array[i], 0, [], 0, [], 0, [], []])
+        for j in range(len(name_array)):
+            if adjacency_matrix[i][j] != 0:
+                record_array[i][2] += 1  # Счетчик детей
+                record_array[i][3].append(name_array[j]) # Дети
+
+                record_array[i][6] += 1  # Счетчик соседей
+                record_array[i][7].append(name_array[j])  # Соседи
+
+                record_array[i][8].append(adjacency_matrix[i][j])  # Вес ребра
+            if adjacency_matrix[j][i] != 0:
+                record_array[i][4] += 1  # Счетчик родителей
+                record_array[i][5].append(name_array[j])  # Родители
+
+                record_array[i][6] += 1
+                record_array[i][7].append(name_array[j])
+
+                record_array[i][8].append(adjacency_matrix[j][i])
+
+
+# Функции поиска
+# Поиск соседей
+# В матрице смежности
+def search_neighbors_matrix(x, flag_test=0):
+    neighbors_list = []
+    for i in range(len(name_array)):
+        if name_array[i] == x:
+            for j in range(len(name_array)):
+                if adjacency_matrix[i][j] != 0:
+                    neighbors_list.append(name_array[j])
+                if adjacency_matrix[j][i] != 0:
+                    neighbors_list.append(name_array[j])
+            break
+    if flag_test == 0:
+        print("Search matrix:\nNeighbors of", x, ":", neighbors_list)
+
+
+# Поиск соседей в списке смежности
+def search_neighbors_list(x, flag_test=0):
+    neighbors_list = []
+    for i in adjacency_list:
+        if i[0] == x:
+            neighbors_list.append(i[1])
+        if i[1] == x:
+            neighbors_list.append(i[0])
+    if flag_test == 0:
+        print("Search list:\nNeighbors of", x, ":", neighbors_list)
+
+
+# В массиве записей
+def search_neighbors_array(x, flag_test=0):
+    for i in record_array:
+        if i[1] == x:
+            if flag_test == 0:
+                print("Search array:\nNeighbors of", x, ":", i[7])  # i[7] - список соседей
+
+
+# Поиск цепи
+# В матрице смежности
+def search_chain_matrix(x, flag_test=0):
+    is_chain = True
+    if len(x) != 1:
+        for i in range(len(x)-1):
+            a = x[i]
+            b = x[i+1]
+            for j in range(len(name_array)):
+                if name_array[j] == a:
+                    a = j
+                if name_array[j] == b:
+                    b = j
+            if adjacency_matrix[a][b] == 0:
+                is_chain = False
+                break
+    else:
+        a = x[0]
+        b = x[0]
+        for j in range(len(name_array)):
+            if name_array[j] == a:
+                a = j
+            if name_array[j] == b:
+                b = j
+        if adjacency_matrix[a][b] == 0:
+            is_chain = False
+    if flag_test == 0:
+        print("Search matrix:")
+        print("Sequence ", end="")
+        for i in x[:len(x)-1]:
+            print(i, end=" -> ")
+        print(x[len(x)-1])
+        if is_chain:
+            print("Is chain")
+        else:
+            print("Is not chain")
+
+
+# В списке смежности
+def search_chain_list(x, flag_test=0):
+    is_chain = False
+    if len(x) != 1:
+        for i in range(len(x) - 1):
+            a = x[i]
+            b = x[i + 1]
+            is_chain = False
+            for i in adjacency_list:
+                if i[0] == a and i[1] == b:
+                    is_chain = True
+                    break
+            if not is_chain:
+                break
+    else:
+        a = x[0]
+        b = x[0]
+        for i in adjacency_list:
+            if i[0] == a and i[1] == b:
+                is_chain = True
+                break
+
+    if flag_test == 0:
+        print("Search list:")
+        print("Sequence ", end="")
+        for i in x[:len(x) - 1]:
+            print(i, end=" -> ")
+        print(x[len(x) - 1])
+        if is_chain:
+            print("Is chain")
+        else:
+            print("Is not chain")
+
+
+# В массиве записей
+def search_chain_array(x, flag_test=0):
+    is_chain = False
+    if len(x) != 1:
+        for i in range(len(x) - 1):
+            a = x[i]
+            b = x[i + 1]
+            is_chain = False
+            for i in record_array:
+                if i[1] == a and b in i[3]:
+                    is_chain = True
+                    break
+            if not is_chain:
+                break
+    else:
+        a = x[0]
+        b = x[0]
+        for i in record_array:
+            if i[1] == a and b in i[3]:  # i[1] - название вершины i[3] - список детей
+                is_chain = True
+                break
+
+    if flag_test == 0:
+        print("Search array:")
+        print("Sequence ", end="")
+        for i in x[:len(x) - 1]:
+            print(i, end=" -> ")
+        print(x[len(x) - 1])
+        if is_chain:
+            print("Is chain")
+        else:
+            print("Is not chain")
+
+
+# Поиск вершин с суммой инцедентных ребер
+# В матрице смежности
+def search_incidence_matrix(x, flag_test=0):
+    incidence_list = []
+    for i in range(len(name_array)):
+        counter = 0
+        for j in range(len(name_array)):
+            if adjacency_matrix[i][j] != 0:
+                counter += adjacency_matrix[i][j]
+            if adjacency_matrix[j][i] != 0:
+                counter += adjacency_matrix[j][i]
+        if counter > x:
+            incidence_list.append(name_array[i])
+    if flag_test == 0:
+        print("Search matrix:")
+        print("List from vertex, whose sum of incident edges is greater than", x, ":", incidence_list)
+
+
+# В списке сможности
+def search_incidence_list(x, flag_test=0):
+    incidence_list = []
+    for i in name_array:
+        counter = 0
+        for j in adjacency_list:
+            if j[0] == i or j[1] == i:
+                counter += j[2]
+        if counter > x:
+            incidence_list.append(i)
+    if flag_test == 0:
+        print("Search list:")
+        print("List from vertex, whose sum of incident edges is greater than", x, ":", incidence_list)
+
+
+# В массиве записей
+def search_incidence_array(x, flag_test=0):
+    incidence_list = []
+    for i in record_array:
+        if sum(i[8]) > x:  # i[8] - инцидентные ребра
+            incidence_list.append(i[1])
+    if flag_test == 0:
+        print("Search list:")
+        print("List from vertex, whose sum of incident edges is greater than", x, ":", incidence_list)
+
+
+# Количество ребер в графе
+# Из матрицы смежности
+def search_quantity_matrix(flag_test=0):
+    counter = 0
+    for i in adjacency_matrix:
+        for j in i:
+            if j != 0:
+                counter += 1
+    if flag_test == 0:
+        print("Search matrix:")
+        print("The number of edges in the graph is equal to", counter)
+
+
+# Из списка смежности
+def search_quantity_list(flag_test=0):
+    counter = len(adjacency_list)
+    if flag_test == 0:
+        print("Search list:")
+        print("The number of edges in the graph is equal to", counter)
+
+
+# Из массива записей
+def search_quantity_array(flag_test=0):
+    counter = 0
+    for i in record_array:
+        counter += i[2]  # i[2] - количество детей
+    if flag_test == 0:
+        print("Search array:")
+        print("The number of edges in the graph is equal to", counter)
+
+
+# Подсчет времени выполнения
+def time_counter():
+    t = 10**6
+    x = "Thr"
+    print(f"Test data to find neighbors: {x}")
+    start_time = time.monotonic()
+    for i in range(t):
+        search_neighbors_matrix(x, flag_test=1)
+    print(f"Search neighbors in matrix: {time.monotonic() - start_time} s")
+
+    x = "Thr"
+    start_time = time.monotonic()
+    for i in range(t):
+        search_neighbors_list(x, flag_test=1)
+    print(f"Search neighbors in list: {time.monotonic() - start_time} s")
+
+    x = "Thr"
+    start_time = time.monotonic()
+    for i in range(t):
+        search_neighbors_array(x, flag_test=1)
+    print(f"Search neighbors in array: {time.monotonic() - start_time} s")
+
+    print()
+
+    x = ["Sun", "Tue", "Sat", "Sun", "Mon"]
+    print(f"Test data to find chain: {x}")
+    start_time = time.monotonic()
+    for i in range(t):
+        search_chain_matrix(x, flag_test=1)
+    print(f"Search chain in matrix: {time.monotonic() - start_time} s")
+
+    x = ["Sun", "Tue", "Sat", "Sun", "Mon"]
+    start_time = time.monotonic()
+    for i in range(t):
+        search_chain_list(x, flag_test=1)
+    print(f"Search chain in list: {time.monotonic() - start_time} s")
+
+    x = ["Sun", "Tue", "Sat", "Sun", "Mon"]
+    start_time = time.monotonic()
+    for i in range(t):
+        search_chain_array(x, flag_test=1)
+    print(f"Search chain in array: {time.monotonic() - start_time} s")
+
+    print()
+
+    x = 15
+    print(f"Test data to find sum incidence: {x}")
+    start_time = time.monotonic()
+    for i in range(t):
+        search_incidence_matrix(x, flag_test=1)
+    print(f"Search incidence in matrix: {time.monotonic() - start_time} s")
+
+    x = 15
+    start_time = time.monotonic()
+    for i in range(t):
+        search_incidence_list(x, flag_test=1)
+    print(f"Search incidence in list: {time.monotonic() - start_time} s")
+
+    x = 15
+    start_time = time.monotonic()
+    for i in range(t):
+        search_incidence_array(x, flag_test=1)
+    print(f"Search incidence in array: {time.monotonic() - start_time} s")
+
+    print()
+
+    start_time = time.monotonic()
+    for i in range(t):
+        search_quantity_matrix(flag_test=1)
+    print(f"Search quantity in matrix: {time.monotonic() - start_time} s")
+
+    start_time = time.monotonic()
+    for i in range(t):
+        search_quantity_list(flag_test=1)
+    print(f"Search quantity in list: {time.monotonic() - start_time} s")
+
+    start_time = time.monotonic()
+    for i in range(t):
+        search_quantity_array(flag_test=1)
+    print(f"Search quantity in array: {time.monotonic() - start_time} s")
+
+
+# Функции вывода
+def print_graph():
+    g = igraph.Graph(directed=True)
+    g.add_vertices(len(name_array))
+    g.vs["label"] = name_array
+
+    edges = []
+    for i in range(len(name_array)):
+        for j in range(len(name_array)):
+            if adjacency_matrix[i][j] != 0:
+                edges.append((i, j))
+
+    g.add_edges(edges)
+    g.es["weight"] = [i[2] for i in adjacency_list]
+    g.es["label"] = [i[2] for i in adjacency_list]
+    igraph.plot(g, bbox=(300, 300), vertex_label_color='black',
+                vertex_label_size=10, vertex_size=20, vertex_color='white')
+
+
+def out_adjacency_matrix():
+    print("\t", end="")
+    for i in name_array:
+        print(i + "\t", end="")
+    print()
+    for i in range(len(name_array)):
+        print(name_array[i] + "\t", end="")
+        for j in range(len(name_array)):
+            print(adjacency_matrix[i][j], "\t", end="")
+        print()
+
+
+def out_adjacency_list():
+    table = PrettyTable(["From", "To", "Weight"])
+    table.add_rows(adjacency_list)
+    print(table)
+
+
+def out_record_array():
+    table = PrettyTable(record_array_th)
+    table.add_rows(record_array)
+    print(table)
+
+
+if __name__ == "__main__":
+    compile_adjacency_list()  # заполнение списка смежности
+    compile_record_array()
+
+    while 1:
+        print("Select action:")
+        print("1 - Search menu\n"
+              "2 - Sizes of structures\n"
+              "3 - Print menu\n"
+              "4 - Work time test\n"
+              "5 - Test\n"
+              "6 - Exit")
+        select = input("Enter your select: ")
+        if select == "1":
+            while 1:
+                print("Select search:")
+                print("1 - Search of neighbors\n"
+                      "2 - Search of chain\n"
+                      "3 - Search of incidence\n"
+                      "4 - Search of the number of edges in a graph\n"
+                      "Any enter - Back")
+                select = input("Enter your select: ")
+                if select == "1":
+                    request = input("Enter vertex: ")
+                    if request not in name_array:
+                        print(f"Vertex {request} does not exist in graph!\n")
+                        continue
+                    search_neighbors_matrix(request)
+                    search_neighbors_list(request)
+                    search_neighbors_array(request)
+                    print()
+                elif select == "2":
+                    request = []
+                    n = int(input("Enter the number of vertices: "))
+                    # if n > len(name_array) or n <= 0:
+                    #     print("The number of entered vertices must be greater than 0 "
+                    #           "and less than or equal to their number in the graph!")
+                    #     continue
+                    if n <= 0:
+                        print("The number of entered vertices must be greater than 0!")
+                        continue
+                    print("Enter the vertices via enter")
+                    while n > 0:
+                        vertex = input()
+                        if vertex not in name_array:
+                            print(f"Vertex {request} does not exist in graph!\nTry again!")
+                            continue
+                        request.append(vertex)
+                        n -= 1
+                    search_chain_matrix(request)
+                    search_chain_list(request)
+                    search_chain_array(request)
+                    print()
+                elif select == "3":
+                    x = int(input("Enter the number greater than which the sum of the incident edges must be:\n"))
+                    search_incidence_matrix(x)
+                    search_incidence_list(x)
+                    search_incidence_array(x)
+                    print()
+                elif select == "4":
+                    search_quantity_matrix()
+                    search_quantity_list()
+                    search_quantity_array()
+                else:
+                    break
+        elif select == "2":
+            print("Size of matrix:", sys.getsizeof(adjacency_matrix), "byte")
+            print("Size of list:", sys.getsizeof(adjacency_list), "byte")
+            print("Size of array:", sys.getsizeof(record_array), "byte")
+        elif select == "3":
+            while 1:
+                print("Select print:")
+                print("1 - Print graph\n"
+                      "2 - Print adjacency matrix\n"
+                      "3 - Print adjacency list\n"
+                      "4 - Print record array\n"
+                      "Any enter - Back")
+                select = input("Enter your select: ")
+                if select == "1":
+                    print_graph()
+                elif select == "2":
+                    out_adjacency_matrix()
+                    print()
+                elif select == "3":
+                    out_adjacency_list()
+                    print()
+                elif select == "4":
+                    out_record_array()
+                    print()
+                else:
+                    break
+        elif select == "4":
+            time_counter()
+        elif select == "5":
+            min_w = 3
+            max_w = 6
+            for i in record_array:
+                for j in i[3]:  # i[3] - Список детей
+                    for z in range(len(i[7])):  # i[7] -  список соседей
+                        if i[7][z] == j:
+                            if min_w <= i[8][z] <= max_w:  # i[8] - веса соседей
+                                print(f"{i[1]} - {j}: {i[8][z]}")
+        elif select == "6":
+            break
+        else:
+            print("Wrong select!")
+>>>>>>> parent of 7c764c5 (Update master)
