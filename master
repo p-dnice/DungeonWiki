@@ -1,5 +1,4 @@
-#sdsd
-00000
+import math
 import igraph
 from prettytable import PrettyTable
 import sys
