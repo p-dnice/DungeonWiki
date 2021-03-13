@@ -1,6 +1,11 @@
 import igraph
 from prettytable import PrettyTable
 import sys
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 import time
 
 name_array = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]  # Массив имен вершин
