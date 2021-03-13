@@ -2,7 +2,7 @@ import igraph
 from prettytable import PrettyTable
 import sys
 import time
-
+1
 name_array = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]  # Массив имен вершин
 # Матрица смежности
 adjacency_matrix = [
