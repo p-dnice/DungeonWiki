@@ -1,5 +1,4 @@
 вова это мега обнова!
-какаши — лучший мега «ниндзя»
 import igraph
 from prettytable import PrettyTable
 import sys
