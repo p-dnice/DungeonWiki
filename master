@@ -69,7 +69,7 @@ def search_neighbors_matrix(x, flag_test=0):
         print("Search matrix:\nNeighbors of", x, ":", neighbors_list)
 
 
-# В списке смежности
+# Поиск соседей в списке смежности
 def search_neighbors_list(x, flag_test=0):
     neighbors_list = []
     for i in adjacency_list:
@@ -396,7 +396,7 @@ def out_record_array():
 
 
 if __name__ == "__main__":
-    compile_adjacency_list()
+    compile_adjacency_list()  # заполнение списка смежности
     compile_record_array()
 
     while 1:
