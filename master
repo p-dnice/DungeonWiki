@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import math
+>>>>>>> parent of e889864 (Update master)
 import igraph
 from prettytable import PrettyTable
 import sys
