@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 вова это мега обнова!
 какаши — лучший мега «ниндзя»
-=======
->>>>>>> parent of 9670114 (Revert "Update master")
 import igraph
 from prettytable import PrettyTable
 import sys
@@ -506,9 +501,4 @@ if __name__ == "__main__":
         elif select == "6":
             break
         else:
-<<<<<<< HEAD
             print("Workng select!")
-=======
-            print("Wrong select!")
->>>>>>> parent of 7c764c5 (Update master)
->>>>>>> parent of 9670114 (Revert "Update master")
