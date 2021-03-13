@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-from math import cos
-=======
->>>>>>> Stashed changes
 import igraph
 from prettytable import PrettyTable
 import sys
