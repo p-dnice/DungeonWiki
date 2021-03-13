@@ -1,4 +1,5 @@
 #sdsd
+00000
 import igraph
 from prettytable import PrettyTable
 import sys
