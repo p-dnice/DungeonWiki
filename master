@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-#
->>>>>>> parent of 1c5d1e3 (Update master)
 import igraph
 from prettytable import PrettyTable
 import sys
