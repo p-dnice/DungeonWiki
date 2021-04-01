@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;
+  font-size: 18px;
+  line-height: 1.5em;
+  color: #000000;
+}
+
+/*Стили формы входа*/
+
+.signin_form_container{
+	background-color: #8f6d4c;
+	background-image: url(../img/logo.png);
+	background-repeat: no-repeat;
+	background-position: 50% 5px;
+	background-size: 112px 139px;
+	width: 300px;
+	height: 300px;
+	margin-bottom: 150px;
+}
+
+.signin_form{
+	padding: 150px 10px 0px;
+}
+
+.signin_form label{
+	color: #ffd700;
+	width: 75px;
+	display: inline-block;
+	font-family: 'Alegreya SC', serif;
+	font-weight: 500;
+	font-size: 20px;
+}
+
+.signin_form input{
+	margin-bottom: 10px;
+	width: 187px;
+	height: 22px;
+	font-size: 11pt;
+	outline: none;
+}
+
+.signin_form input[type="submit"]{
+	width: 100px;
+	height: 35px;
+	margin: 0 auto;
+	display: block;
+	font-family: 'Alegreya SC', serif;
+	font-weight: 500;
+	font-size: 18px;
+	background-color: #ffd700;
+	border: none;
+	margin-top: 10px;
+}
+
+.signin_form input[type="submit"]:hover{
+	cursor: pointer;
+	background-color: #edc900;
+}
+
+/*Стили формы регистрации*/
+
+.registration_form_container{
+	background-color: #8f6d4c;
+	background-image: url(../img/logo.png);
+	background-repeat: no-repeat;
+	background-position: 50% 5px;
+	background-size: 112px 139px;
+	width: 400px;
+	margin-bottom: 150px;
+	padding-top: 145px;
+	font-family: 'Alegreya SC', serif;
+	color: #ffd700;
+	font-size: 20px;
+}
+
+.registration_form_container div{
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 10px;
+}
+
+.registration_form{
+	width: 350px;
+	margin: 0 auto;
+}
+
+.input_field_reg{
+	float: right;
+	width: 195px;
+	height: 22px;
+	outline: none;
+	font-size: 11pt;
+}
+
+.registration_form label{
+	margin-bottom: 15px;
+	display: inline-block;
+}
+
+.registration_form::after{
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.registration_form_container input[type="submit"]{
+	width: 200px;
+	height: 35px;
+	display: block;
+	margin: 0 auto;
+	font-family: 'Alegreya SC', serif;
+	font-weight: 500;
+	font-size: 18px;
+	background-color: #ffd700;
+	border: none;
+	margin-bottom: 10px;
+}
+
+.registration_form_container input[type="submit"]:hover{
+	cursor: pointer;
+	background-color: #edc900;
+}
