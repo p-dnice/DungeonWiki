@@ -1,3 +1,56 @@
-DOCTYPE HTML
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DungeonWiki</title>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="txt/html">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="signin_form_container">
+			<form action="#" method="post" name="signin_form" class="signin_form">
+				<label for="signin_login_field">Логин:</label>
+				<input type="text" name="login" id="signin_login_field">
 
-import jopa_vovi
+				<br>
+
+				<label for="signin_password_field">Пароль:</label>
+				<input type="password" name="password" id="signin_password_field">
+
+				<br>
+
+				<input type="submit" value="Вход">
+
+			</form>
+		</div>
+
+		<div class="registration_form_container">
+			<div>Регистрация</div>
+			<form action="#" method="post" name="registration_form" class="registration_form">
+				<label>Логин:</label>
+				<input type="text" name="login" id="registration_login_field" class="input_field_reg">
+
+				<br>
+
+				<label>E-mail:</label>
+				<input type="text" name="email" id="registration_email_field" class="input_field_reg">
+
+				<br>
+
+				<label>Пароль:</label>
+				<input type="password" name="password" id="registration_password_field" class="input_field_reg">
+
+				<br>
+
+				<label>Повтор пароля:</label>
+				<input type="password" name="password_repeat" id="registration_password_repeat_field" class="input_field_reg">
+
+				<br>
+
+				<input type="submit" value="Зарегистрироваться">
+			</form>
+		</div>
+	</body>
+</html>
