@@ -1,27 +1,43 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;
+  font-family: 'Alegreya SC', serif;
   font-size: 18px;
   line-height: 1.5em;
   color: #000000;
+}
+
+.logo{
+	display: block;
+	margin: 0 auto;
+}
+
+.exit_btn{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.tmp_margin{
+	margin-bottom: 150px;
 }
 
 /*Стили формы входа*/
 
 .signin_form_container{
 	background-color: #8f6d4c;
-	background-image: url(../img/logo.png);
+	padding-top: 5px;
+	background-image: url(../img/bg.jpg);
 	background-repeat: no-repeat;
-	background-position: 50% 5px;
-	background-size: 112px 139px;
+	background-position: -86px -138px;
 	width: 300px;
 	height: 300px;
-	margin-bottom: 150px;
+	position: relative;
+	border-radius: 10px;
 }
 
 .signin_form{
-	padding: 150px 10px 0px;
+	padding: 15px 10px 0px;
 }
 
 .signin_form label{
@@ -39,6 +55,9 @@ body {
 	height: 22px;
 	font-size: 11pt;
 	outline: none;
+	border-radius: 4px;
+	border-width: 1px;
+	border-color: #dcdcdc;
 }
 
 .signin_form input[type="submit"]{
@@ -63,16 +82,16 @@ body {
 
 .registration_form_container{
 	background-color: #8f6d4c;
-	background-image: url(../img/logo.png);
+	background-image: url(../img/bg_reg.jpeg);
 	background-repeat: no-repeat;
-	background-position: 50% 5px;
-	background-size: 112px 139px;
+	background-position: -149px -36px;
 	width: 400px;
-	margin-bottom: 150px;
-	padding-top: 145px;
+	padding-top: 5px;
 	font-family: 'Alegreya SC', serif;
 	color: #ffd700;
 	font-size: 20px;
+	position: relative;
+	border-radius: 10px;
 }
 
 .registration_form_container div{
@@ -92,6 +111,10 @@ body {
 	height: 22px;
 	outline: none;
 	font-size: 11pt;
+	border-radius: 4px;
+	border-width: 1px;
+	border-color: #dcdcdc;
+
 }
 
 .registration_form label{
@@ -116,9 +139,189 @@ body {
 	background-color: #ffd700;
 	border: none;
 	margin-bottom: 10px;
+	border-radius: 4px;
 }
 
 .registration_form_container input[type="submit"]:hover{
 	cursor: pointer;
 	background-color: #edc900;
+}
+
+/*Стили формы комментариев*/
+
+.add_comment_form_container{
+	font-family: 'Alegreya SC', serif;
+	background-color: #8f6d4c;
+	width: 500px;
+	color: #ffd700;
+	font-size: 18px;
+	background-image: url("../img/bg_comment.jpg");
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+.header_comment_form{
+	text-align: center;
+	font-size: 22px;
+	padding-top: 5px;
+}
+
+.comment_text{
+	resize: none;
+	font-family: 'Alegreya SC', serif;
+	font-size: 12pt;
+	outline: none;
+	margin-bottom: 10px;
+	border-radius: 4px;
+	background: rgba(191, 191, 191, 0.8);
+}
+
+.comment_form_content_wrapper{
+	width: 443px;
+	margin: 0 auto;
+}
+
+.add_comment_form p{
+	margin: 0;
+	margin-top: 10px;
+}
+
+.add_comment_form input[type="submit"]{
+	float: left;
+	width: 215px;
+	height: 35px;
+	display: block;
+	font-family: 'Alegreya SC', serif;
+	font-weight: 500;
+	font-size: 18px;
+	background-color: #ffd700;
+	border: none;
+	margin-bottom: 10px;
+	border-radius: 4px;
+}
+
+.add_comment_form input[type="reset"]{
+	float: right;
+	width: 100px;
+	height: 35px;
+	display: block;
+	font-family: 'Alegreya SC', serif;
+	font-weight: 500;
+	font-size: 18px;
+	background-color: #fa4425;
+	border: none;
+	margin-bottom: 10px;
+	border-radius: 4px;
+}
+
+.add_comment_form::after{
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.add_comment_form input[type="submit"]:hover{
+	cursor: pointer;
+	background-color: #edc900;
+}
+
+.add_comment_form input[type="reset"]:hover{
+	cursor: pointer;
+	background-color: #e83f23;
+}
+
+/*Стили формы обратной связи*/
+
+.contact_form_container{
+	font-family: 'Alegreya SC', serif;
+	background-color: #8f6d4c;
+	width: 500px;
+	color: #ffd700;
+	font-size: 18px;
+	background-image: url("../img/bg_contact.jpg");
+	background-repeat: no-repeat;
+	background-size: 102%;
+	background-position: -1px 0px;
+
+}
+
+.contact_header{
+	text-align: center;
+	font-size: 36px;
+	margin: 0;
+	padding-top: 10px;
+	margin-bottom: 25px;
+}
+
+.contact_form_content_wrapper{
+	width: 422px;
+	margin: 0 auto;
+}
+
+.contact_form label{
+	font-size: 20px;
+	display: block;
+}
+
+.contact_form input{
+	outline: none;
+	height: 22px;
+	width: 260px;
+	margin-bottom: 15px;
+	font-size: 14pt;
+}
+
+#contact_theme{
+	width: 414px;
+}
+
+#contact_text{
+	resize: none;
+	outline: none;
+	font-size: 12pt;
+	margin-bottom: 20px;
+}
+
+.contact_form input[type="submit"]{
+	float: left;
+	width: 180px;
+	height: 35px;
+	display: block;
+	font-family: 'Alegreya SC', serif;
+	font-weight: 500;
+	font-size: 18px;
+	background-color: #ffd700;
+	border: none;
+	margin-bottom: 10px;
+	border-radius: 4px;
+}
+
+.contact_form input[type="reset"]{
+	float: right;
+	width: 100px;
+	height: 35px;
+	display: block;
+	font-family: 'Alegreya SC', serif;
+	font-weight: 500;
+	font-size: 18px;
+	background-color: #fa4425;
+	border: none;
+	margin-bottom: 10px;
+	border-radius: 4px;
+}
+
+.contact_form::after{
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.contact_form input[type="submit"]:hover{
+	cursor: pointer;
+	background-color: #edc900;
+}
+
+.contact_form input[type="reset"]:hover{
+	cursor: pointer;
+	background-color: #e83f23;
 }
