@@ -269,6 +269,8 @@ body {
 	width: 260px;
 	margin-bottom: 15px;
 	font-size: 14pt;
+	border-radius: 4px;
+	border:none;
 }
 
 #contact_theme{
